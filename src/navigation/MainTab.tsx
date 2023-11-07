@@ -6,6 +6,7 @@ import HomeNavigator from "./HomeNavigator";
 import ProfileNavigator from "./ProfileNavigator";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Layout from "elements/layout/Layout";
+import { Colors } from "configs";
 
 const Tab = createBottomTabNavigator();
 const MainTab = memo(() => {
@@ -68,7 +69,7 @@ const MyTabBar = ({
           };
 
           const getColor = () => {
-            return isFocused ? "#000000" : "#000000";
+            return isFocused ? Colors.Purple : "#000000";
           };
 
           return (
@@ -81,15 +82,15 @@ const MyTabBar = ({
               key={index}
               activeOpacity={1}
             >
-              <View
-                style={[styles.borderButton, isFocused && styles.borderActive]}
-              >
+              <View style={styles.borderButton}>
                 <FontAwesome5
                   name={getNameIcon()}
                   color={getColor()}
                   size={25}
                 />
-                <Text>{label}</Text>
+                <Text style={[styles.label, isFocused && styles.labelActive]}>
+                  {label}
+                </Text>
               </View>
             </TouchableOpacity>
           );
@@ -109,16 +110,20 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: "row",
+    backgroundColor: Colors.White,
   },
   borderButton: {
-    width: 80,
-    height: 80,
-    borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",
   },
-  borderActive: {
-    backgroundColor: "#f4f4f4",
+
+  label: {
+    fontSize: 13,
+  },
+  labelActive: {
+    color: Colors.Purple,
+    fontSize: 14,
+    fontWeight: "700",
   },
 });
 

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  View as DefaultView,
-  ViewProps,
-  PressableStateCallbackType,
-  ColorValue,
-} from "react-native";
+import { View as DefaultView, ColorValue } from "react-native";
 
 interface Props {
   children?: React.ReactNode;
