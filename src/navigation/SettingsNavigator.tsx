@@ -1,16 +1,16 @@
 import React, { memo } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import routes from "./routes";
-import Profile from "screens/profile/Profile";
+import Settings from "screens/settings/Settings";
 
 const Stack = createNativeStackNavigator();
 
-const ProfileNavigator = memo(() => {
+const SettingsNavigator = memo(() => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name={routes.PROFILE} component={Profile} />
+      <Stack.Screen name={routes.SETTINGS} component={Settings} />
     </Stack.Navigator>
   );
 });
 
-export default ProfileNavigator;
+export default SettingsNavigator;

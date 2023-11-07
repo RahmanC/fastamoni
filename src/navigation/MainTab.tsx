@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import routes from "./routes";
 import HomeNavigator from "./HomeNavigator";
-import ProfileNavigator from "./ProfileNavigator";
+import SettingsNavigator from "./SettingsNavigator";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Layout from "elements/layout/Layout";
 import { Colors } from "configs";
@@ -20,8 +20,8 @@ const MainTab = memo(() => {
           options={{ headerShown: false }}
         />
         <Tab.Screen
-          name={routes.PROFILENAVIGATOR}
-          component={ProfileNavigator}
+          name={routes.SETTINGSNAVIGATOR}
+          component={SettingsNavigator}
           options={{ headerShown: false }}
         />
       </Tab.Navigator>
@@ -64,10 +64,10 @@ const MyTabBar = ({
           const getNameIcon = (): string => {
             switch (index) {
               case 0:
-                return isFocused ? "home" : "home";
+                return "home";
 
               case 1:
-                return isFocused ? "user-alt" : "user";
+                return "tools";
 
               default:
                 return "home";

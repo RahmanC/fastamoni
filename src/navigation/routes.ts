@@ -1,11 +1,11 @@
 const routes = {
   HOMENAVIGATOR: "Home",
   AUTHNAVIGATOR: "Auth",
-  PROFILENAVIGATOR: "Profile",
+  SETTINGSNAVIGATOR: "Settings",
   HOME: "HomeScreen",
   LOGIN: "Login",
   SIGNUP: "SignUp",
-  PROFILE: "ProfileScreen",
+  SETTINGS: "SettingsScreen",
   MAINTAB: "MainTab",
   USERDETAILS: "User Details",
 };

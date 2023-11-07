@@ -6,8 +6,9 @@ import { useDispatch } from "react-redux";
 import { Logout } from "redux/slices/auth";
 import { useNavigation } from "@react-navigation/native";
 import routes from "navigation/routes";
+import SettingItem from "components/SettingItem";
 
-const Profile = () => {
+const Settings = () => {
   const dispatch: any = useDispatch();
   const { navigate }: any = useNavigation();
 
@@ -21,17 +22,17 @@ const Profile = () => {
 
   return (
     <Screen style={styles.container}>
-      <TouchableOpacity onPress={handleLogout}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
+      <SettingItem onPress={() => {}} icon={"user"} title="Update Profile" />
+      <SettingItem onPress={() => {}} icon={"question"} title="Contact" />
+      <SettingItem onPress={handleLogout} icon={"logout"} title="Logout" />
     </Screen>
   );
 };
 
-export default Profile;
+export default Settings;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 40,
+    padding: 20,
   },
 });

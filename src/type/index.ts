@@ -41,3 +41,9 @@ export interface AppFormProps {
   validationSchema: any;
   children: React.ReactNode;
 }
+
+export interface SettingsProps {
+  icon: string | any;
+  title: string;
+  onPress: () => void;
+}
