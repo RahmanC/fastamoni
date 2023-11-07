@@ -3,10 +3,17 @@ import React, { memo } from "react";
 import { UserType } from "type/users";
 import Text from "elements/Text";
 import { Colors } from "configs";
+import { useNavigation } from "@react-navigation/native";
+import routes from "navigation/routes";
 
 const UserItem = memo(({ data }: UserType) => {
+  const { navigate }: any = useNavigation();
+  const handlePress = () => {
+    navigate(routes.USERDETAILS, { data });
+    console.log("work");
+  };
   return (
-    <TouchableOpacity style={styles.userContainer}>
+    <TouchableOpacity style={styles.userContainer} onPress={handlePress}>
       <Text marginRight={10} size={14}>
         {data.first_name}
       </Text>
