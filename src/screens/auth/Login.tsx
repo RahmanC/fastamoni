@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import Text from "elements/Text";
 import Constants from "expo-constants";
@@ -58,6 +58,12 @@ export default function Login() {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
+          <Image
+            source={require("images/icon.png")}
+            style={styles.logo}
+            resizeMode="center"
+          />
+
           <Text type="H4" style={styles.headerText}>
             Please log in to your Account!
           </Text>
@@ -138,6 +144,12 @@ const styles = StyleSheet.create({
   },
   inputLogin: {
     marginTop: 40,
+  },
+  logo: {
+    marginBottom: 12,
+    marginLeft: 12,
+    width: 60,
+    height: 60,
   },
   signUp: {
     alignSelf: "center",

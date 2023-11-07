@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import Text from "elements/Text";
 import Constants from "expo-constants";
@@ -12,7 +12,7 @@ import * as Yup from "yup";
 import { SignUpProps } from "type/input";
 import SubmitButton from "elements/AppButton/SubmitButton";
 import ErrorBlock from "components/ErrorBlock";
-import { RegisterUser } from "redux/slices/auth";
+import { RegisterUser, UpdateRegistrationMessage } from "redux/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 
 const validationSchema = Yup.object().shape({
@@ -43,8 +43,8 @@ export default function SignUp() {
     setVisiblePassword((prev) => !prev);
   }, []);
 
-  const onSignUp = useCallback(() => {
-    navigate(routes.SIGNUP);
+  const onLogin = useCallback(() => {
+    navigate(routes.LOGIN);
   }, [navigate]);
 
   const handleSignUp = async (data: SignUpProps) => {
@@ -60,10 +60,11 @@ export default function SignUp() {
     );
   };
 
-  // clear error message after 10secs
+  // clear success message and navigate to login screen after 10secs
   useEffect(() => {
     if (!!registrationSuccess) {
       const timer = setTimeout(() => {
+        dispatch(UpdateRegistrationMessage(""));
         navigate(routes.LOGIN);
       }, 10000);
 
@@ -75,6 +76,11 @@ export default function SignUp() {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
+          <Image
+            source={require("images/icon.png")}
+            style={styles.logo}
+            resizeMode="center"
+          />
           <Text type="H4" style={styles.headerText}>
             Please create an account!
           </Text>
@@ -149,7 +155,7 @@ export default function SignUp() {
                 type="H5"
                 color={Colors.Purple}
                 style={{ fontWeight: "600" }}
-                onPress={onSignUp}
+                onPress={onLogin}
               >
                 Login
               </Text>
@@ -179,6 +185,12 @@ const styles = StyleSheet.create({
   },
   inputLogin: {
     marginTop: 40,
+  },
+  logo: {
+    marginBottom: 12,
+    marginLeft: 12,
+    width: 60,
+    height: 60,
   },
   signUp: {
     alignSelf: "center",

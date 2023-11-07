@@ -124,6 +124,16 @@ export function UpdateResponse(data: string) {
   };
 }
 
+export function UpdateRegistrationMessage(data: string) {
+  return async (dispatch: any) => {
+    dispatch(
+      slice.actions.updateRegistration({
+        registrationSuccess: data,
+      })
+    );
+  };
+}
+
 export function Logout(handleNavigate: any) {
   return async (dispatch: any) => {
     dispatch(
