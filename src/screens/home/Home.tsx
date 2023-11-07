@@ -1,9 +1,14 @@
 import { FlatList, StyleSheet, View } from "react-native";
-import React, { useCallback, useLayoutEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import Screen from "elements/layout/Screen";
 import { useDispatch, useSelector } from "react-redux";
-import { CreateUser, FetchUser } from "redux/slices/users";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { FetchUser } from "redux/slices/users";
+import { useNavigation } from "@react-navigation/native";
 
 import Text from "elements/Text";
 import UserItem from "components/UserItem";
@@ -26,11 +31,9 @@ const Home = () => {
     dispatch(FetchUser("1"));
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      getUsers();
-    }, [])
-  );
+  useLayoutEffect(() => {
+    getUsers();
+  }, []);
 
   const handleBack = () => {
     setSuccessModal(false);

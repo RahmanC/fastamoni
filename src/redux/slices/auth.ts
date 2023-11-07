@@ -80,3 +80,14 @@ export function UpdateResponse(data: string) {
     );
   };
 }
+
+export function Logout(handleNavigate: any) {
+  return async (dispatch: any) => {
+    dispatch(
+      slice.actions.updateToken({
+        token: null,
+      })
+    );
+    handleNavigate();
+  };
+}
