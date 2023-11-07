@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
+import Text from "elements/Text";
 
 export default function Login() {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>
+      <Text size={12}>
         Login Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta
         rem possimus, asperiores quas sequi omnis accusantium tempora deleniti
         minima eveniet numquam beatae error. Ipsum ut, incidunt minima,

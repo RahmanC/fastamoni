@@ -1,12 +1,13 @@
 import React, { memo, useMemo } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import routes from "./routes";
 import HomeNavigator from "./HomeNavigator";
 import ProfileNavigator from "./ProfileNavigator";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Layout from "elements/layout/Layout";
 import { Colors } from "configs";
+import Text from "elements/Text";
 
 const Tab = createBottomTabNavigator();
 const MainTab = memo(() => {
@@ -88,7 +89,11 @@ const MyTabBar = ({
                   color={getColor()}
                   size={25}
                 />
-                <Text style={[styles.label, isFocused && styles.labelActive]}>
+                <Text
+                  size={isFocused ? 14 : 13}
+                  color={isFocused ? Colors.Purple : Colors.Black}
+                  style={[isFocused && styles.labelActive]}
+                >
                   {label}
                 </Text>
               </View>
@@ -117,12 +122,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  label: {
-    fontSize: 13,
-  },
   labelActive: {
-    color: Colors.Purple,
-    fontSize: 14,
     fontWeight: "700",
   },
 });
