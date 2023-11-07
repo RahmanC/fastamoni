@@ -11,3 +11,7 @@ export const signUp = (data: {}) => {
 export const getUsers = (page: string) => {
   return client.get(`/users?page=${page}`);
 };
+
+export const patchUser = (id: string, data: {}) => {
+  return client.patch(`/users/${id}`, data);
+};

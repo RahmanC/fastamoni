@@ -1,14 +1,22 @@
 import { Image, StyleSheet, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import Screen from "elements/layout/Screen";
 import Text from "elements/Text";
 import AppButton from "elements/AppButton";
 import { Colors } from "configs";
+import ConditionalRender from "components/Conditionalrender";
+import AppModal from "components/AppModal";
 
 const UserDetails = () => {
   const { params }: any = useRoute();
   let userData = params?.data;
+
+  const [modalVisible, setModalVisible] = useState(null);
+
+  const handleUpdate = (data: React.SetStateAction<null>) => {
+    setModalVisible(data);
+  };
 
   return (
     <Screen style={styles.container}>
@@ -21,7 +29,18 @@ const UserDetails = () => {
           {userData.email}
         </Text>
       </View>
-      <AppButton title="Update User Data" style={styles.button} />
+      <AppButton
+        title="Update User Data"
+        style={styles.button}
+        onPress={() => handleUpdate(userData)}
+      />
+      <ConditionalRender isVisible={modalVisible}>
+        <AppModal
+          handleModalClose={() => setModalVisible(null)}
+          children={<Text>hi</Text>}
+          //   visible={false}
+        />
+      </ConditionalRender>
     </Screen>
   );
 };

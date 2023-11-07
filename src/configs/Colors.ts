@@ -10,6 +10,7 @@ const Colors = {
   InputBackground: "#FFFFFF20",
   androidShadow: "rgba(17, 17, 17, 0.2)",
   iosShadow: "rgba(17, 17, 17, 0.06)",
+  ModalBackground: "#1E1F2068",
 };
 
 export default Colors;
