@@ -37,7 +37,7 @@ export default ({
         style,
         {
           borderColor: Colors.Border,
-          backgroundColor: Colors.Background,
+          backgroundColor: Colors.InputBackground,
         },
         props.multiline && styles.multi,
       ]}
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: "row",
     alignItems: "center",
+    minWidth: "100%",
   },
   iconView: {
     width: 24,

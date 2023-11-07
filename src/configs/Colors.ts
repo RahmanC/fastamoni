@@ -6,7 +6,8 @@ const Colors = {
   Purple: "#7B47CC",
   Yellow: "#F3C948",
   Border: "#CBD5E0",
-  Background: "#FAF4EE",
+  Background: "#F4F4FE",
+  InputBackground: "#FFFFFF20",
   androidShadow: "rgba(17, 17, 17, 0.2)",
   iosShadow: "rgba(17, 17, 17, 0.06)",
 };

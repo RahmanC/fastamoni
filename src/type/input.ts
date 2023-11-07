@@ -81,3 +81,12 @@ export interface InputAppProps {
   keyboardType?: any;
   onBlur?: () => void;
 }
+
+export interface ButtonProps {
+  title: string;
+  style?: ViewStyle;
+  onPress?: () => void;
+  children?: any;
+  styleText?: any;
+  disabled?: boolean;
+}
