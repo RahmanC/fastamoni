@@ -7,19 +7,24 @@ import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "configs";
 import routes from "navigation/routes";
 import { useNavigation } from "@react-navigation/native";
-import AppButton from "elements/AppButton";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginUser, UpdateResponse } from "redux/slices/auth";
 import ErrorBlock from "components/ErrorBlock";
+import { AppForm } from "components/AppForm";
+import SubmitButton from "elements/AppButton/SubmitButton";
+import * as Yup from "yup";
+import { LoginProps } from "type/input";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string(),
+  password: Yup.string(),
+});
 
 export default function Login() {
   const dispatch: any = useDispatch();
   const { isLoading, responseError } = useSelector((state: any) => state.auth);
-  //   console.log("token", token);
 
   const { navigate }: any = useNavigation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [visiblePassword, setVisiblePassword] = useState(false);
 
   const onShowHidePassword = useCallback(() => {
@@ -30,12 +35,8 @@ export default function Login() {
     navigate(routes.SIGNUP);
   }, [navigate]);
 
-  const handleLogin = async () => {
-    const apiData = {
-      email: email.toLowerCase(),
-      password: password,
-    };
-    dispatch(LoginUser(apiData, handleNavigate));
+  const handleLogin = async (data: LoginProps) => {
+    dispatch(LoginUser(data, handleNavigate));
   };
 
   const handleNavigate = () => {
@@ -64,34 +65,41 @@ export default function Login() {
             isVisible={!!responseError}
             errorMessage={responseError}
           />
-          <View style={styles.inputLogin}>
-            <InputApp title={"Email"} value={email} onChangeText={setEmail} />
-            <InputApp
-              title={"Password"}
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!visiblePassword}
-              marginTop={24}
-              icon={
-                <Ionicons
-                  name={
-                    visiblePassword ? "md-eye-outline" : "md-eye-off-outline"
-                  }
-                  size={24}
-                  color="black"
-                />
-              }
-              isShowIcon
-              iconPress={onShowHidePassword}
-            />
-          </View>
-          <View style={styles.button}>
-            <AppButton
-              title={isLoading ? "please wait..." : "Login"}
-              disabled={isLoading}
-              onPress={handleLogin}
-            />
-          </View>
+          <AppForm
+            initialValues={{
+              email: "",
+              password: "",
+            }}
+            onSubmit={handleLogin}
+            validationSchema={validationSchema}
+          >
+            <View style={styles.inputLogin}>
+              <InputApp name="email" title={"Email"} />
+              <InputApp
+                name="password"
+                title={"Password"}
+                secureTextEntry={!visiblePassword}
+                marginTop={24}
+                icon={
+                  <Ionicons
+                    name={
+                      visiblePassword ? "md-eye-outline" : "md-eye-off-outline"
+                    }
+                    size={24}
+                    color="black"
+                  />
+                }
+                isShowIcon
+                iconPress={onShowHidePassword}
+              />
+            </View>
+            <View style={styles.button}>
+              <SubmitButton
+                title={isLoading ? "please wait..." : "Login"}
+                disabled={isLoading}
+              />
+            </View>
+          </AppForm>
 
           <View style={styles.signUp}>
             <Text type="H5" color={Colors.Black}>

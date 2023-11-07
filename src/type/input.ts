@@ -60,7 +60,8 @@ export interface InputProps {
 }
 
 export interface InputAppProps {
-  value: string;
+  name: string;
+  value?: string;
   onChangeText?: (text: string) => void;
   placeholder?: string;
   isShowIcon?: boolean;
@@ -89,4 +90,9 @@ export interface ButtonProps {
   children?: any;
   styleText?: any;
   disabled?: boolean;
+}
+
+export interface LoginProps {
+  email: string;
+  password: string;
 }

@@ -4,9 +4,12 @@ import Text from "elements/Text";
 import TextInput from "elements/TextInput";
 import { Colors } from "configs";
 import { InputAppProps } from "type/input";
+import { FormikValues, useFormikContext } from "formik";
+import ErrorMessage from "components/ErrorMessage";
 
 const InputApp = memo(
   ({
+    name,
     value,
     placeholder,
     onChangeText,
@@ -27,6 +30,13 @@ const InputApp = memo(
     keyboardType,
     onBlur,
   }: InputAppProps) => {
+    const { setFieldTouched, setFieldValue, touched, errors, values } =
+      useFormikContext<FormikValues>();
+
+    const handleTextChange = (text: any) => {
+      setFieldValue(name, text);
+    };
+
     return (
       <TouchableOpacity
         style={[styleView, { marginTop: marginTop }]}
@@ -38,12 +48,12 @@ const InputApp = memo(
           {title}
         </Text>
         <TextInput
-          onBlur={onBlur}
+          onBlur={() => setFieldTouched(name)}
           keyboardType={keyboardType}
+          onChangeText={(text) => handleTextChange(text)}
+          value={values[name]}
           {...{
-            value,
             placeholder,
-            onChangeText,
             isShowIcon,
             icon,
             secureTextEntry,
@@ -55,6 +65,7 @@ const InputApp = memo(
           }}
           style={{ marginTop: 4, ...style }}
         />
+        <ErrorMessage visible={touched[name]} error={errors[name]} />
       </TouchableOpacity>
     );
   }

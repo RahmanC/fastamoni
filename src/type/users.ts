@@ -17,4 +17,10 @@ export interface UpdateUserProps {
   handleSuccess: () => void;
   loading?: boolean;
   id: string;
+  user_name: string;
+}
+
+export interface CreateUserTypes {
+  name: string;
+  job: string;
 }

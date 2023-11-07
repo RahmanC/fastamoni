@@ -29,3 +29,15 @@ export interface ErrorBlockProps {
   isVisible: any;
   errorMessage: string;
 }
+
+export interface ErrorProps {
+  visible: any;
+  error: any;
+}
+
+export interface AppFormProps {
+  initialValues: any;
+  onSubmit: (values: any) => void;
+  validationSchema: any;
+  children: React.ReactNode;
+}

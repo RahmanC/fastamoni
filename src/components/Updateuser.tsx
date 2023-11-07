@@ -7,24 +7,27 @@ import { useDispatch } from "react-redux";
 import { UpdateUser } from "redux/slices/users";
 import { Colors } from "configs";
 import Text from "elements/Text";
-import { UpdateUserProps } from "type/users";
+import { CreateUserTypes, UpdateUserProps } from "type/users";
+import SubmitButton from "elements/AppButton/SubmitButton";
+import { AppForm } from "./AppForm";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string(),
+  job: Yup.string(),
+});
 
 const UpdateUserForm = ({
   handleModal,
   handleSuccess,
   loading,
   id,
+  user_name,
 }: UpdateUserProps) => {
   const dispatch: any = useDispatch();
-  const [name, setName] = useState("");
-  const [job, setJob] = useState("");
 
-  const handleCreate = async () => {
-    const apiData = {
-      name: name,
-      job: job,
-    };
-    dispatch(UpdateUser(id, apiData, handleSuccess));
+  const handleUpdate = (data: CreateUserTypes) => {
+    dispatch(UpdateUser(id, data, handleSuccess));
   };
 
   return (
@@ -33,27 +36,30 @@ const UpdateUserForm = ({
         Update User Information
       </Text>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View>
-          <InputApp title={"Name"} value={name} onChangeText={setName} />
-          <InputApp
-            marginTop={24}
-            title={"Job"}
-            value={job}
-            onChangeText={setJob}
-          />
-        </View>
-        <View style={styles.button}>
-          <AppButton
-            title={loading ? "please wait..." : "Submit"}
-            disabled={loading || !name || !job}
-            onPress={handleCreate}
-          />
-          <AppButton
-            title={"Cancel"}
-            style={styles.cancel}
-            onPress={handleModal}
-          />
-        </View>
+        <AppForm
+          initialValues={{
+            name: user_name,
+            job: "",
+          }}
+          onSubmit={handleUpdate}
+          validationSchema={validationSchema}
+        >
+          <View>
+            <InputApp name="name" title={"Name"} />
+            <InputApp name="job" marginTop={24} title={"Job"} />
+          </View>
+          <View style={styles.button}>
+            <SubmitButton
+              title={loading ? "please wait..." : "Submit"}
+              disabled={loading}
+            />
+            <AppButton
+              title={"Cancel"}
+              style={styles.cancel}
+              onPress={handleModal}
+            />
+          </View>
+        </AppForm>
       </ScrollView>
     </Screen>
   );

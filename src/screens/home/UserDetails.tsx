@@ -17,9 +17,15 @@ const UserDetails = () => {
   let userData = params?.data;
 
   const [modalVisible, setModalVisible] = useState(null);
+  const [successModal, setSuccessModal] = useState(false);
 
   const handleUpdate = (data: React.SetStateAction<null>) => {
     setModalVisible(data);
+  };
+
+  const handleBack = () => {
+    setSuccessModal(false);
+    // navigate(routes.HOME);
   };
 
   return (
@@ -44,10 +50,34 @@ const UserDetails = () => {
           children={
             <UpdateUserForm
               id={userData.id}
+              user_name={`${userData.first_name} ${userData.last_name}`}
               handleModal={() => setModalVisible(null)}
-              handleSuccess={() => {}}
+              handleSuccess={() => {
+                setModalVisible(null);
+                setSuccessModal(true);
+              }}
               loading={isLoading}
             />
+          }
+        />
+      </ConditionalRender>
+
+      <ConditionalRender isVisible={successModal}>
+        <AppModal
+          style={styles.modal}
+          customStyle={styles.modalInner}
+          handleModalClose={() => setSuccessModal(false)}
+          children={
+            <View style={styles.successModal}>
+              <Text marginBottom={24} size={16}>
+                User data updated successfully!
+              </Text>
+              <AppButton
+                title="Go Back"
+                onPress={handleBack}
+                style={styles.modalButton}
+              />
+            </View>
           }
         />
       </ConditionalRender>
@@ -80,5 +110,20 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: "700",
+  },
+  modalButton: {
+    minWidth: "100%",
+  },
+  modal: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalInner: {
+    minWidth: "90%",
+    padding: 40,
+  },
+  successModal: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
