@@ -10,7 +10,6 @@ const UserItem = memo(({ data }: UserType) => {
   const { navigate }: any = useNavigation();
   const handlePress = () => {
     navigate(routes.USERDETAILS, { data });
-    console.log("work");
   };
   return (
     <TouchableOpacity style={styles.userContainer} onPress={handlePress}>

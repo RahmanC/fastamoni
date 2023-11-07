@@ -9,7 +9,13 @@ import {
 } from "react-native";
 import { AppModalProps } from "type";
 
-const AppModal = ({ children, visible, handleModalClose }: AppModalProps) => {
+const AppModal = ({
+  children,
+  visible,
+  handleModalClose,
+  customStyle,
+  style,
+}: AppModalProps) => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   useEffect(() => {
@@ -34,7 +40,7 @@ const AppModal = ({ children, visible, handleModalClose }: AppModalProps) => {
   }, []);
 
   const handleBackdropPress = () => {
-    handleModalClose();
+    // handleModalClose();
   };
 
   return (
@@ -52,10 +58,13 @@ const AppModal = ({ children, visible, handleModalClose }: AppModalProps) => {
         <View
           style={[
             styles.centeredView,
+            style,
             isKeyboardVisible && styles.modalWithKeyboard,
           ]}
         >
-          <Animated.View style={styles.modalView}>{children}</Animated.View>
+          <Animated.View style={[styles.modalView, customStyle]}>
+            {children}
+          </Animated.View>
         </View>
       </TouchableOpacity>
     </Modal>
@@ -68,7 +77,7 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "flex-end",
-    alignItems: "flex-end",
+    alignItems: "center",
   },
   backdrop: {
     flex: 1,
@@ -78,7 +87,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     minWidth: "100%",
-    minHeight: "40%",
+    minHeight: "auto",
     marginHorizontal: 15,
     backgroundColor: "white",
     borderRadius: 20,

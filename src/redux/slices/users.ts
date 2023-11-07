@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUsers } from "api/services";
+import { createUser, getUsers, patchUser } from "api/services";
 
 const initialState = {
   users: [],
@@ -43,6 +43,56 @@ export function FetchUser(page: string) {
           users: users,
         })
       );
+    }
+
+    dispatch(
+      slice.actions.updateIsLoading({
+        isLoading: false,
+        error: false,
+      })
+    );
+  };
+}
+
+// create user
+export function CreateUser(data: {}, action?: any) {
+  return async (dispatch: any) => {
+    dispatch(
+      slice.actions.updateIsLoading({
+        isLoading: true,
+        error: false,
+      })
+    );
+
+    const response: any = await createUser(data);
+    console.log("create", response);
+    if (response.status === 201) {
+      action();
+    }
+
+    dispatch(
+      slice.actions.updateIsLoading({
+        isLoading: false,
+        error: false,
+      })
+    );
+  };
+}
+
+// update user
+export function UpdateUser(id: string, data: {}, action?: any) {
+  return async (dispatch: any) => {
+    dispatch(
+      slice.actions.updateIsLoading({
+        isLoading: true,
+        error: false,
+      })
+    );
+
+    const response: any = await patchUser(id, data);
+
+    if (response.status === 200) {
+      action();
     }
 
     dispatch(

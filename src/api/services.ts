@@ -15,3 +15,7 @@ export const getUsers = (page: string) => {
 export const patchUser = (id: string, data: {}) => {
   return client.patch(`/users/${id}`, data);
 };
+
+export const createUser = (data: {}) => {
+  return client.post("/users", data);
+};

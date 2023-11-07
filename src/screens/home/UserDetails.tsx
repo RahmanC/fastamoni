@@ -7,8 +7,12 @@ import AppButton from "elements/AppButton";
 import { Colors } from "configs";
 import ConditionalRender from "components/Conditionalrender";
 import AppModal from "components/AppModal";
+import UpdateUserForm from "components/Updateuser";
+import { useSelector } from "react-redux";
 
 const UserDetails = () => {
+  const { isLoading } = useSelector((state: any) => state.users);
+
   const { params }: any = useRoute();
   let userData = params?.data;
 
@@ -37,8 +41,14 @@ const UserDetails = () => {
       <ConditionalRender isVisible={modalVisible}>
         <AppModal
           handleModalClose={() => setModalVisible(null)}
-          children={<Text>hi</Text>}
-          //   visible={false}
+          children={
+            <UpdateUserForm
+              id={userData.id}
+              handleModal={() => setModalVisible(null)}
+              handleSuccess={() => {}}
+              loading={isLoading}
+            />
+          }
         />
       </ConditionalRender>
     </Screen>

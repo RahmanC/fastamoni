@@ -1,8 +1,8 @@
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import React, { useCallback, useLayoutEffect, useState } from "react";
 import Screen from "elements/layout/Screen";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchUser } from "redux/slices/users";
+import { CreateUser, FetchUser } from "redux/slices/users";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import Text from "elements/Text";
@@ -10,10 +10,14 @@ import UserItem from "components/UserItem";
 import ButtonIconHeader from "components/ButtonIconHeader";
 import ConditionalRender from "components/Conditionalrender";
 import AppModal from "components/AppModal";
+import CreateUserForm from "components/CreateUser";
+import AppButton from "elements/AppButton";
+import routes from "navigation/routes";
 
 const Home = () => {
-  const { setOptions } = useNavigation();
+  const { setOptions, navigate }: any = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
 
   const dispatch: any = useDispatch();
   const { isLoading, users } = useSelector((state: any) => state.users);
@@ -27,6 +31,11 @@ const Home = () => {
       getUsers();
     }, [])
   );
+
+  const handleBack = () => {
+    setSuccessModal(false);
+    navigate(routes.HOME);
+  };
 
   useLayoutEffect(() => {
     setOptions({
@@ -75,8 +84,35 @@ const Home = () => {
       <ConditionalRender isVisible={modalVisible}>
         <AppModal
           handleModalClose={() => setModalVisible(false)}
-          children={<Text>hi</Text>}
-          //   visible={false}
+          children={
+            <CreateUserForm
+              handleSuccess={() => {
+                setModalVisible(false);
+                setSuccessModal(true);
+              }}
+              handleModal={() => setModalVisible(false)}
+            />
+          }
+        />
+      </ConditionalRender>
+
+      <ConditionalRender isVisible={successModal}>
+        <AppModal
+          style={styles.modal}
+          customStyle={styles.modalInner}
+          handleModalClose={() => setSuccessModal(false)}
+          children={
+            <View style={styles.successModal}>
+              <Text marginBottom={24} size={16}>
+                User created Successfully!
+              </Text>
+              <AppButton
+                title="Go Back"
+                onPress={handleBack}
+                style={styles.button}
+              />
+            </View>
+          }
         />
       </ConditionalRender>
     </Screen>
@@ -85,4 +121,20 @@ const Home = () => {
 
 export default Home;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  button: {
+    minWidth: "100%",
+  },
+  modal: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalInner: {
+    minWidth: "90%",
+    padding: 40,
+  },
+  successModal: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

@@ -1,7 +1,11 @@
+import { ViewStyle } from "react-native";
+
 export interface AppModalProps {
   children: React.ReactNode;
   visible?: boolean;
   handleModalClose: () => void;
+  customStyle?: ViewStyle;
+  style?: ViewStyle;
 }
 
 export interface ConditionProps {
