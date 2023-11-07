@@ -1,14 +1,20 @@
 import { FlatList, StyleSheet } from "react-native";
-import React, { useCallback } from "react";
+import React, { useCallback, useLayoutEffect, useState } from "react";
 import Screen from "elements/layout/Screen";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchUser } from "redux/slices/users";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import Text from "elements/Text";
 import UserItem from "components/UserItem";
+import ButtonIconHeader from "components/ButtonIconHeader";
+import ConditionalRender from "components/Conditionalrender";
+import AppModal from "components/AppModal";
 
 const Home = () => {
+  const { setOptions } = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+
   const dispatch: any = useDispatch();
   const { isLoading, users } = useSelector((state: any) => state.users);
 
@@ -21,6 +27,28 @@ const Home = () => {
       getUsers();
     }, [])
   );
+
+  useLayoutEffect(() => {
+    setOptions({
+      title: "Users",
+      headerStyle: {
+        shadowColor: "transparent",
+        shadowRadius: 0,
+        shadowOffset: { height: 0 },
+        elevation: 0,
+      },
+      headerLeft: null,
+      headerRight: () => (
+        <ButtonIconHeader
+          marginRight={10}
+          marginBottom={7}
+          icon="plus"
+          // label="Create User"
+          onPress={() => setModalVisible(true)}
+        />
+      ),
+    });
+  });
 
   if (isLoading) {
     return (
@@ -44,6 +72,13 @@ const Home = () => {
           paddingBottom: 16,
         }}
       />
+      <ConditionalRender isVisible={modalVisible}>
+        <AppModal
+          handleModalClose={() => setModalVisible(false)}
+          children={<Text>hi</Text>}
+          //   visible={false}
+        />
+      </ConditionalRender>
     </Screen>
   );
 };

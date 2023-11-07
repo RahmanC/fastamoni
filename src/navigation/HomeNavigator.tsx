@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 
 const HomeNavigator = memo(() => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator>
       <Stack.Screen name={routes.HOME} component={Home} />
       <Stack.Screen name={routes.USERDETAILS} component={UserDetails} />
     </Stack.Navigator>

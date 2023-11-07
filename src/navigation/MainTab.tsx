@@ -14,10 +14,15 @@ const MainTab = memo(() => {
   return (
     <View style={{ flex: 1 }}>
       <Tab.Navigator tabBar={(props) => <MyTabBar {...props} lazy={true} />}>
-        <Tab.Screen name={routes.HOMENAVIGATOR} component={HomeNavigator} />
+        <Tab.Screen
+          name={routes.HOMENAVIGATOR}
+          component={HomeNavigator}
+          options={{ headerShown: false }}
+        />
         <Tab.Screen
           name={routes.PROFILENAVIGATOR}
           component={ProfileNavigator}
+          options={{ headerShown: false }}
         />
       </Tab.Navigator>
     </View>
