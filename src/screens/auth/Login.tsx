@@ -34,7 +34,11 @@ export default function Login() {
       email: email.toLowerCase(),
       password: password,
     };
-    dispatch(LoginUser(apiData));
+    dispatch(LoginUser(apiData, handleNavigate));
+  };
+
+  const handleNavigate = () => {
+    navigate(routes.HOME);
   };
 
   return (
@@ -66,7 +70,11 @@ export default function Login() {
             />
           </View>
           <View style={styles.button}>
-            <AppButton title="Login" onPress={handleLogin} />
+            <AppButton
+              title={isLoading ? "please wait..." : "Login"}
+              disabled={isLoading}
+              onPress={handleLogin}
+            />
           </View>
 
           <View style={styles.signUp}>

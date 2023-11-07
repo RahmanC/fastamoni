@@ -20,6 +20,7 @@ const Screen = ({ children, style }: Screen) => {
 const styles = StyleSheet.create({
   screen: {
     paddingTop: Constants.statusBarHeight,
+    paddingHorizontal: 20,
     flex: 1,
     backgroundColor: Colors.Background,
   },

@@ -1,31 +1,30 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice } from "@reduxjs/toolkit";
-import { login } from "api/services";
+import { getUsers } from "api/services";
 
 const initialState = {
-  token: null,
+  users: [],
   isLoading: false,
   error: false,
 };
 
 const slice = createSlice({
-  name: "auth",
+  name: "users",
   initialState,
   reducers: {
     updateIsLoading(state, action) {
       state.error = action.payload.error;
       state.isLoading = action.payload.isLoading;
     },
-    updateToken(state, action) {
-      state.token = action.payload.token;
+    updateUsers(state, action) {
+      state.users = action.payload.users;
     },
   },
 });
 
 export default slice.reducer;
 
-// login user
-export function LoginUser(data: {}, action?: any) {
+// fetch user
+export function FetchUser(page: string) {
   return async (dispatch: any) => {
     dispatch(
       slice.actions.updateIsLoading({
@@ -34,17 +33,16 @@ export function LoginUser(data: {}, action?: any) {
       })
     );
 
-    const response: any = await login(data);
+    const response: any = await getUsers(page);
 
     if (response.status === 200) {
-      let token = response.data.token;
-      AsyncStorage.setItem("token", token);
+      let users = response.data.data;
+
       dispatch(
-        slice.actions.updateToken({
-          token: token,
+        slice.actions.updateUsers({
+          users: users,
         })
       );
-      action();
     }
 
     dispatch(

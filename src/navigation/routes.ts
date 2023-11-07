@@ -7,6 +7,7 @@ const routes = {
   SIGNUP: "SignUp",
   PROFILE: "ProfileScreen",
   MAINTAB: "MainTab",
+  USERDETAILS: "User Details",
 };
 
 export default routes;

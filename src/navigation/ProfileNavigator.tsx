@@ -7,12 +7,8 @@ const Stack = createNativeStackNavigator();
 
 const ProfileNavigator = memo(() => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name={routes.PROFILE}
-        component={Profile}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name={routes.PROFILE} component={Profile} />
     </Stack.Navigator>
   );
 });

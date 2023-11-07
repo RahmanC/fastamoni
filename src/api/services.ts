@@ -7,3 +7,7 @@ export const login = (data: {}) => {
 export const signUp = (data: {}) => {
   return client.post("/register", data);
 };
+
+export const getUsers = (page: string) => {
+  return client.get(`/users?page=${page}`);
+};
