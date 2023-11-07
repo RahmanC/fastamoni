@@ -6,11 +6,16 @@ import { Colors } from "configs";
 import { ErrorBlockProps } from "type";
 import ConditionalRender from "./Conditionalrender";
 
-const ErrorBlock = ({ isVisible, errorMessage }: ErrorBlockProps) => {
+const ErrorBlock = ({
+  isVisible,
+  errorMessage,
+  style,
+  textStyle,
+}: ErrorBlockProps) => {
   return (
     <ConditionalRender isVisible={isVisible}>
-      <View style={styles.container}>
-        <Text style={styles.error}>{errorMessage}</Text>
+      <View style={[styles.container, style]}>
+        <Text style={[styles.error, textStyle]}>{errorMessage}</Text>
       </View>
     </ConditionalRender>
   );
