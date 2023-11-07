@@ -21,6 +21,9 @@
       ],
       "@redux/*": [
         "src/redux/*"
+      ],
+      "@api/*": [
+        "src/api/*"
       ]
   }
 },

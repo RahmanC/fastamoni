@@ -17,6 +17,7 @@ module.exports = function (api) {
             "@navigation/*": ["src/navigation/*"],
             "@redux/*": ["src/redux/*"],
             "@type/*": ["src/type/*"],
+            "@api/*": ["src/api/*"],
           },
         },
       ],

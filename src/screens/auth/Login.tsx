@@ -8,10 +8,13 @@ import { Colors } from "configs";
 import routes from "navigation/routes";
 import { useNavigation } from "@react-navigation/native";
 import AppButton from "elements/AppButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginUser } from "redux/slices/auth";
 
 export default function Login() {
-  const { isLoading, isLoggedIn } = useSelector((state: any) => state.auth);
+  const dispatch: any = useDispatch();
+  const { isLoading, token } = useSelector((state: any) => state.auth);
+  //   console.log("token", token);
 
   const { navigate }: any = useNavigation();
   const [email, setEmail] = useState("");
@@ -25,6 +28,14 @@ export default function Login() {
   const onSignUp = useCallback(() => {
     navigate(routes.SIGNUP);
   }, [navigate]);
+
+  const handleLogin = async () => {
+    const apiData = {
+      email: email.toLowerCase(),
+      password: password,
+    };
+    dispatch(LoginUser(apiData));
+  };
 
   return (
     <View style={styles.container}>
@@ -55,7 +66,7 @@ export default function Login() {
             />
           </View>
           <View style={styles.button}>
-            <AppButton title="Login" />
+            <AppButton title="Login" onPress={handleLogin} />
           </View>
 
           <View style={styles.signUp}>
