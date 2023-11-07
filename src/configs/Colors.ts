@@ -11,6 +11,8 @@ const Colors = {
   androidShadow: "rgba(17, 17, 17, 0.2)",
   iosShadow: "rgba(17, 17, 17, 0.06)",
   ModalBackground: "#1E1F2068",
+  Red: "red",
+  LighRed: "rgba(206, 19, 3, 0.1)",
 };
 
 export default Colors;

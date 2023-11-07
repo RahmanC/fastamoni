@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, View } from "react-native";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Text from "elements/Text";
 import Constants from "expo-constants";
 import InputApp from "elements/InputApp";
@@ -9,11 +9,12 @@ import routes from "navigation/routes";
 import { useNavigation } from "@react-navigation/native";
 import AppButton from "elements/AppButton";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginUser } from "redux/slices/auth";
+import { LoginUser, UpdateResponse } from "redux/slices/auth";
+import ErrorBlock from "components/ErrorBlock";
 
 export default function Login() {
   const dispatch: any = useDispatch();
-  const { isLoading, token } = useSelector((state: any) => state.auth);
+  const { isLoading, responseError } = useSelector((state: any) => state.auth);
   //   console.log("token", token);
 
   const { navigate }: any = useNavigation();
@@ -41,6 +42,17 @@ export default function Login() {
     navigate(routes.HOME);
   };
 
+  // clear error message after 10secs
+  useEffect(() => {
+    if (!!responseError) {
+      const timer = setTimeout(() => {
+        dispatch(UpdateResponse(""));
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [responseError]);
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -48,6 +60,10 @@ export default function Login() {
           <Text type="H4" style={styles.headerText}>
             Please log in to your Account!
           </Text>
+          <ErrorBlock
+            isVisible={!!responseError}
+            errorMessage={responseError}
+          />
           <View style={styles.inputLogin}>
             <InputApp title={"Email"} value={email} onChangeText={setEmail} />
             <InputApp

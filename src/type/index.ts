@@ -24,3 +24,8 @@ export interface ButtonIconHeaderProps {
   style?: any;
   label?: string;
 }
+
+export interface ErrorBlockProps {
+  isVisible: any;
+  errorMessage: string;
+}

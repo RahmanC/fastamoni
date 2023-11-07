@@ -6,6 +6,7 @@ const initialState = {
   token: null,
   isLoading: false,
   error: false,
+  responseError: "",
 };
 
 const slice = createSlice({
@@ -18,6 +19,9 @@ const slice = createSlice({
     },
     updateToken(state, action) {
       state.token = action.payload.token;
+    },
+    updateResponseError(state, action) {
+      state.responseError = action.payload.responseError;
     },
   },
 });
@@ -36,7 +40,9 @@ export function LoginUser(data: {}, action?: any) {
 
     const response: any = await login(data);
 
-    if (response.status === 200) {
+    let success = response.status === 200 && !response.data.error;
+
+    if (success) {
       let token = response.data.token;
       AsyncStorage.setItem("token", token);
       dispatch(
@@ -47,10 +53,29 @@ export function LoginUser(data: {}, action?: any) {
       action();
     }
 
+    if (!success) {
+      let errorMessage = response.data.error;
+      dispatch(
+        slice.actions.updateResponseError({
+          responseError: errorMessage,
+        })
+      );
+    }
+
     dispatch(
       slice.actions.updateIsLoading({
         isLoading: false,
         error: false,
+      })
+    );
+  };
+}
+
+export function UpdateResponse(data: string) {
+  return async (dispatch: any) => {
+    dispatch(
+      slice.actions.updateResponseError({
+        responseError: data,
       })
     );
   };

@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 
 const RootNavigator = memo(() => {
   return (
-    <Stack.Navigator initialRouteName={routes.MAINTAB}>
+    <Stack.Navigator initialRouteName={routes.AUTHNAVIGATOR}>
       <Stack.Screen
         name={routes.MAINTAB}
         component={MainTab}
