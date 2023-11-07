@@ -15,6 +15,7 @@ module.exports = function (api) {
             "@elements/*": ["src/elements/*"],
             "@configs/*": ["src/configs/*"],
             "@navigation/*": ["src/navigation/*"],
+            "@redux/*": ["src/redux/*"],
             "@type/*": ["src/type/*"],
           },
         },

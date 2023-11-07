@@ -18,6 +18,9 @@
       ],
       "@navigation/*": [
         "src/navigation/*"
+      ],
+      "@redux/*": [
+        "src/redux/*"
       ]
   }
 },

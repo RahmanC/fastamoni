@@ -8,8 +8,11 @@ import { Colors } from "configs";
 import routes from "navigation/routes";
 import { useNavigation } from "@react-navigation/native";
 import AppButton from "elements/AppButton";
+import { useSelector } from "react-redux";
 
 export default function Login() {
+  const { isLoading, isLoggedIn } = useSelector((state: any) => state.auth);
+
   const { navigate }: any = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
