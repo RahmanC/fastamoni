@@ -13,10 +13,7 @@ const UserItem = memo(({ data }: UserType) => {
   };
   return (
     <TouchableOpacity style={styles.userContainer} onPress={handlePress}>
-      <Text marginRight={10} size={14}>
-        {data.first_name}
-      </Text>
-      <Text size={14}>{data.last_name}</Text>
+      <Text size={14}>{`${data.first_name} ${data.last_name}`}</Text>
     </TouchableOpacity>
   );
 });
