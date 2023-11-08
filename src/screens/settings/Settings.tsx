@@ -17,7 +17,7 @@ const Settings = () => {
   };
 
   const handleNavigate = () => {
-    navigate(routes.AUTHNAVIGATOR);
+    navigate(routes.LOGIN);
   };
 
   return (
@@ -33,6 +33,7 @@ export default Settings;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
   },
 });

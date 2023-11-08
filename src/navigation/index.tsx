@@ -6,6 +6,7 @@ import MainTab from "./MainTab";
 import { useSelector } from "react-redux";
 import Screen from "elements/layout/Screen";
 import Text from "elements/Text";
+import Loader from "elements/Loader";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,11 +27,7 @@ const RootNavigator = memo(() => {
   }, [token]);
 
   if (loading) {
-    return (
-      <Screen>
-        <Text>Loading...</Text>
-      </Screen>
-    );
+    return <Loader />;
   }
 
   return (

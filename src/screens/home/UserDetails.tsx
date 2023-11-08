@@ -25,7 +25,6 @@ const UserDetails = () => {
 
   const handleBack = () => {
     setSuccessModal(false);
-    // navigate(routes.HOME);
   };
 
   return (
@@ -53,8 +52,8 @@ const UserDetails = () => {
               user_name={`${userData.first_name} ${userData.last_name}`}
               handleModal={() => setModalVisible(null)}
               handleSuccess={() => {
-                setModalVisible(null);
                 setSuccessModal(true);
+                setModalVisible(null);
               }}
               loading={isLoading}
             />
@@ -73,7 +72,7 @@ const UserDetails = () => {
                 User data updated successfully!
               </Text>
               <AppButton
-                title="Go Back"
+                title="Okay"
                 onPress={handleBack}
                 style={styles.modalButton}
               />

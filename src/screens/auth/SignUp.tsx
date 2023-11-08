@@ -77,7 +77,7 @@ export default function SignUp() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Image
-            source={require("images/icon.png")}
+            source={require("../../../assets/icon.png")}
             style={styles.logo}
             resizeMode="center"
           />

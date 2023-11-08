@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Platform } from "react-native";
 import routes from "./routes";
 import HomeNavigator from "./HomeNavigator";
 import SettingsNavigator from "./SettingsNavigator";
@@ -96,6 +96,7 @@ const MyTabBar = ({
                 />
                 <Text
                   size={isFocused ? 14 : 13}
+                  marginTop={5}
                   color={isFocused ? Colors.Purple : Colors.Black}
                   style={[isFocused && styles.labelActive]}
                 >
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    height: 82,
+    height: Platform.OS === "ios" ? 82 : 60,
     paddingBottom: 10,
   },
   container: {

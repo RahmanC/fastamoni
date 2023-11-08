@@ -36,11 +36,15 @@ export default function Login() {
   }, [navigate]);
 
   const handleLogin = async (data: LoginProps) => {
-    dispatch(LoginUser(data, handleNavigate));
+    let apiData = {
+      email: data.email.toLowerCase(),
+      password: data.password,
+    };
+    dispatch(LoginUser(apiData, handleNavigate));
   };
 
   const handleNavigate = () => {
-    navigate(routes.HOME);
+    navigate(routes.MAINTAB, { replace: true });
   };
 
   // clear error message after 10secs
@@ -59,7 +63,7 @@ export default function Login() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Image
-            source={require("images/icon.png")}
+            source={require("../../../assets/icon.png")}
             style={styles.logo}
             resizeMode="center"
           />

@@ -18,6 +18,7 @@ import AppModal from "components/AppModal";
 import CreateUserForm from "components/CreateUser";
 import AppButton from "elements/AppButton";
 import routes from "navigation/routes";
+import Loader from "elements/Loader";
 
 const Home = () => {
   const { setOptions, navigate }: any = useNavigation();
@@ -63,11 +64,7 @@ const Home = () => {
   });
 
   if (isLoading) {
-    return (
-      <Screen>
-        <Text>Loading...</Text>
-      </Screen>
-    );
+    return <Loader />;
   }
 
   return (

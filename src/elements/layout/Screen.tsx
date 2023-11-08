@@ -1,7 +1,7 @@
 import React from "react";
 import Constants from "expo-constants";
 
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
 import { Colors } from "configs";
 
 interface Screen {
@@ -20,7 +20,7 @@ const Screen = ({ children, style }: Screen) => {
 const styles = StyleSheet.create({
   screen: {
     paddingTop: Constants.statusBarHeight,
-    paddingHorizontal: 20,
+    paddingHorizontal: Platform.OS === "ios" ? 20 : 10,
     flex: 1,
     backgroundColor: Colors.Background,
   },
